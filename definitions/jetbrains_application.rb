@@ -46,7 +46,7 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
     to filepath
   end
 
-  template "/home/#{attributeContext[:user]}/Desktop/#{name}.desktop" do
+  template "/home/#{attributeContext[:user]}/Desktop/jetbrains-#{name}.desktop" do
     source 'application_icon.desktop.erb'
     cookbook 'jetbrains_application'
     owner attributeContext[:user]
@@ -55,6 +55,18 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
     variables(
       :name => params[:name],
       :internal_name => params[:internal_name]
+    )
+  end
+
+  template "/home/#{attributeContext[:user]}/.local/share/applications/jetbrains-#{name}.desktop" do
+    source 'application_icon.desktop.erb'
+    cookbook 'jetbrains_application'
+    owner attributeContext[:user]
+    group attributeContext[:user]
+    mode 0744
+    variables(
+        :name => params[:name],
+        :internal_name => params[:internal_name]
     )
   end
 
