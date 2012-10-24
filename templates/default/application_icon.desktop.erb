@@ -1,0 +1,23 @@
+<%
+downcase_name = @name.downcase
+%>
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=<%= node[:applications][:jetbrains][downcase_name][:dir] %>/current/bin/<%= downcase_name %>.sh
+GenericName[en_US]=
+GenericName=
+Icon=<%= node[:applications][:jetbrains][downcase_name][:dir] %>/current/bin/<%= @internal_name.downcase %>.png
+MimeType=
+Name[en_US]=<%= @internal_name %>
+Name=<%= @internal_name %>
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+
