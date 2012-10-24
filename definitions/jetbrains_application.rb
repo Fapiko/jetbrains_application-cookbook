@@ -58,10 +58,14 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
     )
   end
 
-  cookbook_file "/home/#{attributeContext[:user]}/.#{params[:internal_name]}#{params[:major_version]}0/config/#{name}#{params[:major_version]}0.key" do
-    owner attributeContext[:user]
-    group attributeContext[:user]
-    source "#{name}#{params[:major_version]}0.key"
+  begin
+    cookbook_ "/home/#{attributeContext[:user]}/.#{params[:internal_name]}#{params[:major_version]}0/config/#{name}#{params[:major_version]}0.key" do
+      owner attributeContext[:user]
+      group attributeContext[:user]
+      source "#{name}#{params[:major_version]}0.key"
+    end
+  rescue Exception
+    log "[Jetbrains #{params[:internal_name]}] has been installed as an evaluation"
   end
 
 end
