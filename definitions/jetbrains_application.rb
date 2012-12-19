@@ -70,9 +70,15 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
     )
   end
 
-  begin
-    t = resources(:cookbook_file => "#{name}#{params[:major_version]}0.key" )
-  rescue Chef::Exceptions::ResourceNotFound => e
+  jetbrains_licenses = Chef::EncryptedDataBagItem.load('jetbrains_application', 'licenses')
+  if jetbrains_licenses.has_key?(name)
+    file "/home/#{attributeContext[:user]}/.#{name}#{params[:major_version]}/config/#{name}#{params[:major_version]}0.key" do
+      owner attributeContext[:user]
+      group attributeContext[:user]
+      mode 0744
+      content jetbrains_licenses[name]
+    end
+  else
     log "[Jetbrains #{params[:name]}] has been installed as an evaluation"
   end
 
