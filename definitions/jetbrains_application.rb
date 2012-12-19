@@ -11,7 +11,8 @@ require 'base64'
 
 define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 do
 
-  name = params[:name].downcase
+  name = params[:name].to_s.downcase
+  node.set[:applications][:jetbrains][name][:user] = node[:applications][:user]
   attributeContext = node[:applications][:jetbrains][name]
 
   shortname = "#{name}-#{attributeContext[:version]}"
@@ -74,11 +75,11 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
 
   jetbrains_licenses = Chef::EncryptedDataBagItem.load('jetbrains_application', 'licenses')
   if jetbrains_licenses[name]
-    file "/home/#{attributeContext[:user]}/.#{name}#{params[:major_version]}/config/#{name}#{params[:major_version]}0.key" do
+    file "/home/#{attributeContext[:user]}/.#{params[:internal_name]}#{params[:major_version]}0/config/#{name}#{params[:major_version]}0.key" do
       owner attributeContext[:user]
       group attributeContext[:user]
       mode 0744
-      content Base64.decode(jetbrains_licenses[name])
+      content Base64.decode64(jetbrains_licenses[name])
     end
   else
     log "[Jetbrains #{params[:name]}] has been installed as an evaluation"

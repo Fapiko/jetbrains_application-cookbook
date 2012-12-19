@@ -4,5 +4,3 @@ default[:applications][:jetbrains][:rubymine][:url] = "http://download.jetbrains
 default[:applications][:jetbrains][:rubymine][:checksum] = '6f0bc3a4923bd832b279cd2a45fd3515ddf8e666c70b65d671452fe4e807c43b'
 
 default[:applications][:jetbrains][:rubymine][:dir] = '/opt/rubymine'
-
-default[:applications][:jetbrains][:rubymine][:user] = node[:applications][:user]
