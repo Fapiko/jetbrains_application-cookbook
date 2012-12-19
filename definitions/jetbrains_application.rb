@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+require 'base64'
+
 define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 do
 
   name = params[:name].downcase
@@ -76,7 +78,7 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
       owner attributeContext[:user]
       group attributeContext[:user]
       mode 0744
-      content jetbrains_licenses[name]
+      content Base64.decode(jetbrains_licenses[name])
     end
   else
     log "[Jetbrains #{params[:name]}] has been installed as an evaluation"
