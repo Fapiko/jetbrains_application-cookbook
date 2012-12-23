@@ -73,7 +73,12 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
     )
   end
 
-  jetbrains_licenses = Chef::EncryptedDataBagItem.load('jetbrains_application', 'licenses')
+  if Chef::Config.solo
+    jetbrains_licenses = Chef::DataBagItem.load('jetbrains_application', 'licenses')
+  else
+    jetbrains_licenses = Chef::EncryptedDataBagItem.load('jetbrains_application', 'licenses')
+  end
+
   if jetbrains_licenses[name]
     file "/home/#{attributeContext[:user]}/.#{params[:internal_name]}#{params[:major_version]}0/config/#{name}#{params[:major_version]}0.key" do
       owner attributeContext[:user]
