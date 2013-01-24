@@ -80,7 +80,15 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 d
   end
 
   if jetbrains_licenses[name]
-    file "/home/#{attributeContext[:user]}/.#{params[:internal_name]}#{params[:major_version]}0/config/#{name}#{params[:major_version]}0.key" do
+    
+    directory "/home/#{attributeContext[:user]}/.#{params[:internal_name]}#{params[:major_version]}0/config" do
+      owner attributeContext[:user]
+      group attributeContext[:user]
+      mode 0755
+      recursive true
+    end
+
+	file "/home/#{attributeContext[:user]}/.#{params[:internal_name]}#{params[:major_version]}0/config/#{name}#{params[:major_version]}0.key" do
       owner attributeContext[:user]
       group attributeContext[:user]
       mode 0744
