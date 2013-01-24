@@ -6,3 +6,9 @@
 # 
 # All rights reserved - Do Not Redistribute
 #
+
+include_recipe 'java'
+
+node[:applications][:jetbrains][:install].each do |application|
+	include_recipe "#{@cookbook_name}::#{application}"
+end

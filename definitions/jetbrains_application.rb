@@ -7,7 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'java'
 require 'base64'
 
 define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5 do
