@@ -5,4 +5,4 @@ default[:applications][:jetbrains][:phpstorm][:checksum] = 'ad5797a28a8580ce380d
 
 default[:applications][:jetbrains][:phpstorm][:dir] = '/opt/phpstorm'
 
-default[:applications][:jetbrains][:phpstorm][:user] = node[:applications][:user] = 'ljandrew'
+default[:applications][:jetbrains][:phpstorm][:user] = node[:applications][:user]
