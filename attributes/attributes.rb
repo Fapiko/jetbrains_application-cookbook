@@ -1,3 +1,3 @@
 default[:applications][:user] = 'ljandrew'
 
-default[:applications][:jetbrains][:install] = ['rubymine', 'phpstorm', 'pycharm']
+default[:applications][:jetbrains][:install] = ['rubymine', 'phpstorm', 'pycharm', 'intellij']
