@@ -9,14 +9,19 @@
 
 require 'base64'
 
-define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5, :runfile => nil do
+define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5,
+       :runfile => nil, :iconfile => nil do
 
   name = params[:name].to_s.downcase
-  if params[:runfile].nil?
+  runfile = params[:runfile]
+  if runfile == nil
     runfile = "#{name}.sh"
-  else
-    runfile = params[:runfile]
   end
+  iconfile = params[:iconfile]
+  if iconfile == nil
+    iconfile ="#{params[:internal_name].downcase}.png"
+  end
+
   node.set[:applications][:jetbrains][name][:user] = node[:applications][:user]
   attributeContext = node[:applications][:jetbrains][name]
 
@@ -62,7 +67,8 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5, 
     mode 0744
     variables(
       :name => params[:name],
-      :internal_name => params[:internal_name]
+      :runfile => runfile,
+      :iconfile => iconfile
     )
   end
 
@@ -74,8 +80,8 @@ define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5, 
     mode 0744
     variables(
         :name => params[:name],
-        :runfile => params[:runfile],
-        :internal_name => params[:internal_name]
+        :runfile => runfile,
+        :iconfile => iconfile
     )
   end
 
