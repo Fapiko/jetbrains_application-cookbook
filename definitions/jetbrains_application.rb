@@ -12,8 +12,10 @@ require 'base64'
 define :jetbrains_application, :internal_name => 'WebIde', :major_version => 5, :runfile => nil do
 
   name = params[:name].to_s.downcase
-  if runfile = params[:runfile] == nil
+  if params[:runfile] == nil
     runfile = "#{name}.sh"
+  else
+    runfile = params[:runfile]
   end
   node.set[:applications][:jetbrains][name][:user] = node[:applications][:user]
   attributeContext = node[:applications][:jetbrains][name]
