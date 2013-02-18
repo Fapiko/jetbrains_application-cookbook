@@ -4,7 +4,7 @@ downcase_name = @name.downcase
 [Desktop Entry]
 Comment[en_US]=
 Comment=
-Exec=<%= node[:applications][:jetbrains][downcase_name][:dir] %>/current/bin/<%= downcase_name %>.sh
+Exec=<%= node[:applications][:jetbrains][downcase_name][:dir] %>/current/bin/<%= @runfile %>
 GenericName[en_US]=
 GenericName=
 Icon=<%= node[:applications][:jetbrains][downcase_name][:dir] %>/current/bin/<%= @internal_name.downcase %>.png

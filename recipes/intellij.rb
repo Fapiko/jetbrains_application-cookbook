@@ -10,4 +10,5 @@
 jetbrains_application :IntelliJ do
   internal_name :IntelliJIdea
   major_version 12
+  runfile 'idea.sh'
 end
